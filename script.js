@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         gallery.appendChild(img);
       });
+      // Lazy load images
+      const lazyImages = document.querySelectorAll('img[data-src]');
+      lazyImages.forEach(img => {
+        img.src = img.dataset.src; // Set the 'src' attribute to trigger lazy loading
+        img.removeAttribute('data-src'); // Remove 'data-src' attribute
+      });
     })
     .catch(error => console.error('Error fetching images:', error));
 });
