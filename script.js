@@ -9,6 +9,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const img = document.createElement('img');
         img.src = image.thumbnail;
         img.dataset.directory = image.directory;
+        
+        // Construct URLs for resized images
+        const directory = image.directory;
+        const resizedImages = {
+          small: directory + '/cover_300w.jpg',
+          medium: directory + '/cover_600w.jpg',
+          large: directory + '/cover_900w.jpg'
+        };
+        
+        // Set srcset attribute with resized image URLs
+        img.srcset = `${resizedImages.small} 300w, ${resizedImages.medium} 600w, ${resizedImages.large} 900w`;
+
         img.addEventListener('click', function() {
           window.location.href = 'subgallery.html?directory=' + encodeURIComponent(image.directory);
         });

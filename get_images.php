@@ -1,5 +1,5 @@
 <?php
-$imagesDirectory = 'images';
+$imagesDirectory = 'pages';
 
 $images = [];
 
