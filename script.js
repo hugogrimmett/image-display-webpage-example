@@ -7,23 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
       data.forEach(image => {
         const img = document.createElement('img');
+        
+        // Set the thumbnail as the initial source
         img.src = image.thumbnail;
+        
+        // Set dataset for directory
         img.dataset.directory = image.directory;
         
-        // Construct URLs for resized images
-        const directory = image.directory;
-        const resizedImages = {
-          small: directory + '/cover_300w.jpg',
-          medium: directory + '/cover_600w.jpg',
-          large: directory + '/cover_900w.jpg'
-        };
-        
-        // Set srcset attribute with resized image URLs
-        img.srcset = `${resizedImages.small} 300w, ${resizedImages.medium} 600w, ${resizedImages.large} 900w`;
+        // Construct srcset attribute using resized image URLs
+        const srcset = `${image.small} 300w, ${image.medium} 600w, ${image.large} 900w`;
+        img.srcset = srcset;
 
         img.addEventListener('click', function() {
           window.location.href = 'subgallery.html?directory=' + encodeURIComponent(image.directory);
         });
+        
         gallery.appendChild(img);
       });
       // Lazy load images
